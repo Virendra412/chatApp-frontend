@@ -27,17 +27,23 @@ import axios from "axios";
 import { UserItem } from "./UserItem";
 import { ChatState } from "../Context/ChatProvider";
 import { Navigate,useNavigate } from "react-router-dom";
+import { YourProfile } from "./UserComponents/YourProfile";
  
 export const Navbar = ({hide,setHide}) => {
   const { user,token,chats,setChats,setSelectedChat,selectedChat,setToken,setUser } = ChatState();
   const [searchResult, setSearchResult] = useState([]);
-  const { isOpen, onOpen, onClose } = useDisclosure()
+  const searchDrawer = useDisclosure()   
+  const profileDrawer = useDisclosure()   
+  
   const [search, setSearch] = useState("")
   const [loading, setLoading] = useState(false)
   const btnRef = useRef()
+  const profileRef= useRef()
   const toast = useToast()
   const navigate=useNavigate()
   
+console.log(profileDrawer.onOpen);
+
   function Logout() {
     console.log("logout working");
     localStorage.removeItem("userInfo")
@@ -131,20 +137,20 @@ export const Navbar = ({hide,setHide}) => {
 
       <Box className="draw" background='linear-gradient(#DDA26C,#D09FA4)'>
         <Drawer
-          isOpen={isOpen}
+          isOpen={searchDrawer.isOpen}
           placement="right"
-          onClose={onClose}
+          onClose={searchDrawer.onClose}
           finalFocusRef={btnRef}
           
         >
           <DrawerOverlay />
           <DrawerContent
-background= 'linear-gradient(10deg, #cdc1ff 0%, #e5d9f2 74%)'>
+background= 'linear-gradient(10deg, #EDF1F4, #C3CBDC)'>
             <DrawerCloseButton />
             <DrawerHeader>Search Users</DrawerHeader>
 
             <DrawerBody>
-              <Box display="flex" pb={2}>
+              <Box display="flex" pb={4}>
                 <Input
                   size="sm"
                   placeholder="Search by name or email"
@@ -171,20 +177,26 @@ background= 'linear-gradient(10deg, #cdc1ff 0%, #e5d9f2 74%)'>
             </DrawerBody>
 
             <DrawerFooter>
-              <Button size='sm' colorScheme="teal"  mr={3} onClick={onClose} width='100%'>
+              <Button size='sm' colorScheme="red"  mr={3} onClick={searchDrawer.onClose} width='100%'>
                 Close
               </Button>
               {/* <Button colorScheme="blue">Save</Button> */}
             </DrawerFooter>
           </DrawerContent>
         </Drawer>
+       
+  <YourProfile user={user} isOpen={profileDrawer.isOpen} onOpen={profileDrawer.onOpen} onClose={profileDrawer.onClose} profileRef={profileRef}/>
+        
+        
+
+
       </Box>
       <Box display="flex" position="relative" flexDirection='column' alignItems='center' gap='5px'>
       <Tooltip label={user.name} >
-          <Avatar  mb='8px' size="xs" name={user.name} src={user ? user.pic : null} ></Avatar>
+          <Avatar  mb='8px' size="xs" name={user.name} src={user ? user.pic : null} ref={profileRef} onClick={profileDrawer.onOpen}></Avatar>
         </Tooltip>
         <Tooltip label="Search Users">
-        <Button size="sm" onClick={onOpen} colorScheme="gray" ref={btnRef} display="flex" gap="10px" > <i className="fa-solid fa-magnifying-glass" style={{ color: "black" }} ></i>{" "} </Button>
+        <Button size="sm" onClick={searchDrawer.onOpen} colorScheme="gray" ref={btnRef} display="flex" gap="10px" > <i className="fa-solid fa-magnifying-glass" style={{ color: "black" }} ></i>{" "} </Button>
         </Tooltip>
         <Tooltip label="Logout">
           <Button size="sm" colorScheme="gray" onClick={Logout}>

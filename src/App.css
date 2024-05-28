@@ -91,7 +91,7 @@ nav{
     transition: color 0.1s;
 }
 .userItem:hover{
-    background:linear-gradient(90deg,#f5c190,#d0aeb1);
+    background:linear-gradient(90deg,#DCE8E0,#D2D8D6);
     /* outline: 1px solid rgb(115, 115, 115); */
    
 }
