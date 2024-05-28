@@ -6,7 +6,7 @@ dotenv.config()
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
-  
+  base:"/chatApp-frontend/",
   define: {
     'process.env': process.env
   }
