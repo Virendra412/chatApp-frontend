@@ -183,12 +183,12 @@ const handleSearch = async () => {
 
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
-        <ModalContent>
+        <ModalContent background= 'linear-gradient(10deg, #EDF1F4, #C3CBDC)'>
           <ModalHeader display="flex" justifyContent="center">
             {chatdata.chatName}
           </ModalHeader>
           <ModalCloseButton />
-          <ModalBody display="grid" gap="10px">
+          <ModalBody display="grid" gap="10px" >
             <Box display="flex" gap="5px" flexWrap="wrap">
               {chatdata.users.map((usr) => { if (usr._id !== user._id) { return ( <UserBadge key={usr._id} user={usr} removeFunction={() => handleRemove(usr)} /> ); } })}
             </Box>

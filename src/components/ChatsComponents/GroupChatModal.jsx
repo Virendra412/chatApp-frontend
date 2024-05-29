@@ -143,10 +143,10 @@ export const GroupChatModal = () => {
   
         <Modal isOpen={isOpen} onClose={onClose}>
           <ModalOverlay />
-          <ModalContent>
+          <ModalContent background= 'linear-gradient(10deg, #EDF1F4, #C3CBDC)'>
             <ModalHeader display='flex' justifyContent='center'>New Group</ModalHeader>
             <ModalCloseButton />
-            <ModalBody display='grid' gap='10px'>
+            <ModalBody display='grid' gap='10px' >
             <FormControl display='flex' gap='10px'>
                             <Input tupe='text' size='sm' placeholder='Enter Chat Name' value={chatName} onChange={(e) => { setChatName(e.target.value) }} />
                             

@@ -97,7 +97,7 @@ console.log(profileDrawer.onOpen);
   };
 
   const accessChat = async (userId) => {
-    console.log(userId);
+    // console.log(userId);
 
     try {
       
@@ -112,7 +112,7 @@ console.log(profileDrawer.onOpen);
       if (!chats.find((c) => c._id === data._id)) setChats([data, ...chats]);
       setSelectedChat(data);
       setSearchResult([]);
-      onClose();
+      searchDrawer.onClose();
     } catch (error) {
       toast({
         title: "Error fetching the chat",
