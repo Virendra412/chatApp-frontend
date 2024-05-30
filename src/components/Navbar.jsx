@@ -42,7 +42,7 @@ export const Navbar = ({hide,setHide}) => {
   const toast = useToast()
   const navigate=useNavigate()
   
-console.log(profileDrawer.onOpen);
+
 
   function Logout() {
     console.log("logout working");
@@ -108,7 +108,7 @@ console.log(profileDrawer.onOpen);
         },
       };
       const { data } = await axios.post(`${process.env.VITE_API_URL}/chat`, { userId }, config);
-      console.log(data);
+      // console.log(data);
       if (!chats.find((c) => c._id === data._id)) setChats([data, ...chats]);
       setSelectedChat(data);
       setSearchResult([]);
