@@ -113,6 +113,7 @@ nav{
 
 .scrollChat{
     height: 100% !important;
+   position: relative;
 }
 .menu{
     display: none;
@@ -147,6 +148,26 @@ nav{
     .singleChat{
         border-top-left-radius: 10px;
         border-left: 1px solid #c6c4c4;
+  
     }
     
+}
+
+.inputfile {
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
+.fileLabel{
+    font-size: 1.25em;
+    font-weight: 700;
+    color: white;
+    background-color: black;
+    display: inline-block;
+    padding: 0.5rem;
+    width: 100%;
+    border-radius: 7px;
 }

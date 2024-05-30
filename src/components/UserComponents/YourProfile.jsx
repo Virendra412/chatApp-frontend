@@ -119,47 +119,55 @@ const toast= useToast()
           alignItems="center"
           rowGap="1rem"
         >
-          <Box padding='1px' border='3px solid black' borderRadius='50%'>
-            <Avatar width='150px' height='150px' name={user.name} src={user.pic} />
-            </Box>
+          <Box padding="1px" border="3px solid black" borderRadius="50%">
+            <Avatar
+              width="150px"
+              height="150px"
+              name={user.name}
+              src={user.pic}
+            />
+          </Box>
 
-          <FormControl display= 'flex' alignItems='center'>
-            <InputGroup border='1px solid black' borderRadius='7px'>
-              <InputLeftAddon background='black' color='white' >Name:</InputLeftAddon>
-              <Input value={name} onChange={(e)=>{setname(e.target.value)}} />
-              </InputGroup>
+          <FormControl display="flex" alignItems="center" marginTop={10}>
+            <InputGroup border="1px solid black" borderRadius="7px">
+              <InputLeftAddon background="black" color="white">
+                Name:
+              </InputLeftAddon>
+              <Input
+                value={name}
+                onChange={(e) => {
+                  setname(e.target.value);
+                }}
+              />
+            </InputGroup>
           </FormControl>
-          <FormControl display= 'flex' alignItems='center'>
-            <InputGroup border='1px solid black' borderRadius='7px'>
-              <InputLeftAddon background='black' color='white' >Email:</InputLeftAddon>
-              <Input  value={email} onChange={(e)=>{setemail(e.target.value)}}  />
-              </InputGroup>
+          <FormControl display="flex" alignItems="center">
+            <InputGroup border="1px solid black" borderRadius="7px">
+              <InputLeftAddon background="black" color="white">
+                Email:
+              </InputLeftAddon>
+              <Input
+                value={email}
+                onChange={(e) => {
+                  setemail(e.target.value);
+                }}
+              />
+            </InputGroup>
           </FormControl>
-         
-          <FormControl id="pic" >
-          <InputGroup border='1px solid black' borderRadius='7px' >
-              <InputLeftAddon background='black' color='white' >Pic:</InputLeftAddon>
-              <Input p={1.5}  type="file"   accept="image/*" onChange={(e) => postDetails(e.target.files[0])} />
-              </InputGroup>
-            
-       
-       
-      </FormControl>
 
-          
+          <FormControl id="pic">
+            <FormLabel className="fileLabel"><Box display='inline-block' marginInline={3}><i className="fa-solid fa-upload"></i></Box>Choose a pic</FormLabel>
+            <Input p={1.5} type="file" className="inputfile" accept="image/*" onChange={(e) => postDetails(e.target.files[0])} />
+          </FormControl>
         </DrawerBody>
 
         <DrawerFooter>
-          <Button
-            size="sm"
-            colorScheme="red"
-            mr={3}
-            onClick={onClose}
-            
-          >
+          <Button size="sm" colorScheme="red" mr={3} width='50%' onClick={onClose}>
             Close
           </Button>
-          <Button colorScheme="blue" size='sm' onClick={userUpdate}>Update</Button>
+          <Button colorScheme="blue" size="sm" width='50%' onClick={userUpdate}>
+            Update
+          </Button>
         </DrawerFooter>
       </DrawerContent>
     </Drawer>

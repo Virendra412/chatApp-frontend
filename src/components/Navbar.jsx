@@ -49,7 +49,7 @@ export const Navbar = ({hide,setHide}) => {
     localStorage.removeItem("userInfo")
     setToken("")
     setUser({})
-    return navigate("/")
+    return window.location.assign("/")
     
    
   }

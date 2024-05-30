@@ -1,4 +1,5 @@
 import axios from "axios";
+import moment from "moment";
 const BASE_URL = process.env.VITE_API_URL
 
 const token =
@@ -38,6 +39,7 @@ async function fetchChatMessages(tk, chatId) {
     `${BASE_URL}/message/${chatId}`,
     config
   );
+  console.log(allmessages.data);
   return allmessages.data;
 }
 async function sendMessage(tk, chatId, content) {
@@ -179,7 +181,8 @@ export {
   mesColour,
   isOwnMes2,
   isSenderFirstMessage,
-  randomColorGiver,chatPic,latestMessageDisplayer
+  randomColorGiver, chatPic, latestMessageDisplayer,
+  msgTime,isDayChange,mesDates
 };
 
 
@@ -226,4 +229,23 @@ function chatPic(chat, loggedUser) {
 }
 function getSender(loggedUser, users) {
   return users[0]?._id === loggedUser?._id ? users[1].name : users[0].name;
+}
+
+function msgTime(time) {
+  return moment(time).format('h:mm a').toUpperCase()
+}
+const isDayChange = (ind, arr) => {
+  if(ind==0) return true
+      if (moment(arr[ind].createdAt).format('D') - moment(arr[ind - 1].createdAt).format('D') > 0) return true
+      return false
+}
+
+// console.log(isDayChange(22,sampleData));
+const mesDates = (time) => {
+  const noww = moment()
+  const today=moment(noww).format('YYYY-MM-DD')
+  
+  if(moment(today).diff(time,'minutes')<=0) return 'Today'
+  if (moment(today).diff(time, 'minutes') <= 1140) return 'Yesterday'
+  return moment(time).format('DD-MM-YYYY')
 }
