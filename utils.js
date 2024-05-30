@@ -56,6 +56,16 @@ async function sendMessage(tk, chatId, content) {
   return res.data;
 }
 
+async function updateUserInfo(tk,data) {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${tk}`,
+    },
+  };
+
+  const res = await axios.post(`${BASE_URL}/user/update`, data,config);
+  return res.data;
+}
 
 // --------------------------------------------------------GROUP CHAT API---------------------------------------------------------------------------------
 
@@ -153,6 +163,7 @@ function latestMessageDisplayer(str) {
 
 export {
   getCurrentUser,
+  updateUserInfo,
   fetchChats,
   getSender,
   fetchChatMessages,

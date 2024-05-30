@@ -17,13 +17,30 @@ import {
   FormControl,
   FormLabel,
   Box,
+  CheckboxGroup,
+  useToast
 } from "@chakra-ui/react";
+import { ChatState } from "../../Context/ChatProvider";
+import { updateUserInfo } from "../../../utils";
 
 export const YourProfile = ({ user, isOpen, onOpen, onClose, profileRef }) => {
   const [name, setname] = useState(user.name)
   const [email, setemail] = useState(user.email)
   const [pic, setPic] = useState(user.pic)
+const toast= useToast()
+  const { token,setToken,setUser } = ChatState();
 
+  const data = {
+    id: user._id,
+    name,email,pic
+  }
+
+  async function userUpdate() {
+    const result = await updateUserInfo(token, data)
+    // console.log(result);
+    localStorage.setItem('userInfo',result.token)
+    window.location.reload()
+  }
   
   async function postDetails(pics) {
     console.log(pics);
@@ -138,11 +155,11 @@ export const YourProfile = ({ user, isOpen, onOpen, onClose, profileRef }) => {
             colorScheme="red"
             mr={3}
             onClick={onClose}
-            width="100%"
+            
           >
             Close
           </Button>
-          {/* <Button colorScheme="blue">Save</Button> */}
+          <Button colorScheme="blue" size='sm' onClick={userUpdate}>Update</Button>
         </DrawerFooter>
       </DrawerContent>
     </Drawer>

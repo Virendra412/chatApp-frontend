@@ -18,6 +18,7 @@ export const ChatProvider = ({ children }) => {
 
 
   useEffect(() => {
+    // console.log("token dependency running");
     const ano = async () => {
      
       if (!token) {
