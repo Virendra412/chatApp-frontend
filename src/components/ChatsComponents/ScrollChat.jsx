@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { v4 as uuid } from "uuid";
 import {
   isDayChange,
   isOwnMes,
@@ -29,29 +30,32 @@ export const ScrollChat = ({ messages }) => {
         return (
           <>
           <Box
-            key={mes._id}
+            key={uuid()}
             position="relative"
             display="flex"
             flexDirection="column"
             bg="transparent"
             p="2px 10px"
             >
-            {isDayChange(ind, messages) && <Box as='b'  textAlign='center' marginBlock='20px' borderBottom='1px solid grey' boxShadow="0px 2px 5px gray" bg='rgba(255, 255, 255, 0.8)'  padding='3px 10px' borderRadius="5px" alignSelf='center' fontSize='10px'>{ mesDates(mes.createdAt)}</Box>}
+            {isDayChange(ind, messages) && <Box as='b'  textAlign='center' marginBlock='20px' borderBottom='1px solid grey' boxShadow="0px 2px 5px gray" bg='rgba(255, 255, 255, 0.8)'  padding='3px 10px' borderRadius="5px" alignSelf='center'  fontSize='10px'>{ mesDates(mes.createdAt)}</Box>}
              
             <Box
               bg={mesColour(user, mes)}
-              maxWidth="60%"
+                maxWidth="70%"
+                width='fit-content'
               borderRadius="5px"
               mt={isSenderFirstMessage(messages, ind) ? "15px" : "0px"}
               alignSelf={isOwnMes(user, mes)}
-              p="0px 10px 2px 10px"
+              p="2px 0px 2px 8px"
               boxShadow="2px 2px 5px gray"
-              display='flex' alignItems='end' gap='1rem'
+                display='flex' gap='1rem'
+                alignItems='center'
+               
             >
-              <Box>
+              <Box >
                 {mes.chat.isGroupChat &&
                   isSenderFirstMessage(messages, ind) && (
-                    <Text
+                    <Text 
                       fontSize="11px"
                       as="b"
                       lineHeight="1"
@@ -61,11 +65,11 @@ export const ScrollChat = ({ messages }) => {
                       {isOwnMes2(user, mes)}{" "}
                     </Text>
                   )}
-                <Text key={mes._id} className="textmessage" lineHeight="1.5">
+                <Text  className="textmessage" lineHeight="1.2" wordBreak='break-word'>
                   {mes.content}
                 </Text>
               </Box>
-              <Text fontSize="9px">{msgTime(mes.createdAt)}</Text>
+              <Text  fontSize="9px" marginRight='3px' whiteSpace='nowrap' alignSelf='end' lineHeight='1'>{msgTime(mes.createdAt)}</Text>
             </Box>
             </Box>
             </>

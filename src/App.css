@@ -160,6 +160,7 @@ nav{
 	overflow: hidden;
 	position: absolute;
 	z-index: -1;
+    display: none;
 }
 .fileLabel{
     font-size: 1.25em;

@@ -25,11 +25,18 @@ export const ChatProvider = ({ children }) => {
         setGettingUserInfo(false)
         return navigate("/");
       } else {
-        const getnoti = await getNotification(token)
-        setNoti(getnoti.notif)
-        const result = await getCurrentUser(token)
+        // const getnoti = await getNotification(token)
+        // setNoti(getnoti.notif)
+        try {
+          const result = await getCurrentUser(token)
+          setUser(result)
+        } catch (error) {
+          setGettingUserInfo(false)
+          return navigate("/");
+        }
         
-        setUser(result)
+        
+        
         setGettingUserInfo(false)
       }
    };

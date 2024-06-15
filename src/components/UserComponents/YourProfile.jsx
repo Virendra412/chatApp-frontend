@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Drawer,
   DrawerBody,
@@ -95,6 +95,12 @@ const toast= useToast()
     // setLoading(false);
     return;
   }
+
+  useEffect(() => {
+    setname(user.name)
+    setemail(user.email)
+    setPic(user.pic)
+  },[isOpen])
   return (
     <Drawer
       isOpen={isOpen}
@@ -113,7 +119,7 @@ const toast= useToast()
         <DrawerHeader>Profile</DrawerHeader>
 
         <DrawerBody
-          marginTop="10%"
+          
           display="flex"
           flexDirection="column"
           alignItems="center"
@@ -159,14 +165,15 @@ const toast= useToast()
             <FormLabel className="fileLabel"><Box display='inline-block' marginInline={3}><i className="fa-solid fa-upload"></i></Box>Choose a pic</FormLabel>
             <Input p={1.5} type="file" className="inputfile" accept="image/*" onChange={(e) => postDetails(e.target.files[0])} />
           </FormControl>
+          <Button alignSelf='start' >Logout</Button>
         </DrawerBody>
 
-        <DrawerFooter>
-          <Button size="sm" colorScheme="red" mr={3} width='50%' onClick={onClose}>
-            Close
-          </Button>
-          <Button colorScheme="blue" size="sm" width='50%' onClick={userUpdate}>
+        <DrawerFooter display='flex' flexDirection='column' alignItems='start' rowGap='10px'>
+          <Button colorScheme="blue" size="sm" width='100%' onClick={userUpdate}>
             Update
+          </Button>
+          <Button size="sm" colorScheme="red" mr={3} width='100%' onClick={onClose}>
+            Close
           </Button>
         </DrawerFooter>
       </DrawerContent>

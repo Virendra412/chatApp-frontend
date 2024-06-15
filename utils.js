@@ -39,7 +39,7 @@ async function fetchChatMessages(tk, chatId) {
     `${BASE_URL}/message/${chatId}`,
     config
   );
-  console.log(allmessages.data);
+  // console.log(allmessages.data);
   return allmessages.data;
 }
 async function sendMessage(tk, chatId, content) {

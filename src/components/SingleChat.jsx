@@ -54,13 +54,15 @@ export const SingleChat = ({ fetchAgain, setFetchAgain }) => {
     if (event.type == "keydown" && event.key !== "Enter") return;
 
     if (textMessage.length > 0) {
-      const res = await sendMessage(token, selectedChat._id, textMessage);
+      let MSG = textMessage;
+      setTextMessage("");
+      const res = await sendMessage(token, selectedChat._id, MSG);
      
       // setFetchAgain((prev) => !prev);
       setMessages((prev) => {
         return [...prev, res];
       });
-      setTextMessage("");
+      
       socket.emit("sendMessage", res);
     }
   }

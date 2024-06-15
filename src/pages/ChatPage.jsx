@@ -1,14 +1,25 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Navbar } from "../components/Navbar";
 import { ChatState } from "../Context/ChatProvider";
 import { AllChats } from "../components/AllChats";
 import { SingleChat } from "../components/SingleChat";
 import { Box,Spinner } from "@chakra-ui/react";
+import { getNotification } from "../../utils";
 const ChatPage = () => {
-  const { user,gettingUserInfo } = ChatState();
+  const { user,gettingUserInfo,noti, setNoti,token } = ChatState();
   const [fetchAgain, setFetchAgain] = useState(false)
   const [hide, setHide] = useState(true)
+
+  useEffect(() => {
+    (async () => {
+      console.log("noti req sent");
+      const getnoti = await getNotification(token)
+        setNoti(getnoti.notif)
+    })();
+  }, [token])
   return (
+      
+
     <>
    
         <Box className="chatpage" height="100vh" display="flex">
