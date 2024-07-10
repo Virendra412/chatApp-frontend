@@ -97,7 +97,8 @@ export const SignUp = () => {
       console.log(sendData);
       const {data} = await axios.post(`${process.env.VITE_API_URL}/user/register`, sendData);
       console.log(data);
-      localStorage.setItem('userInfo',data.token)
+      localStorage.setItem('userInfo', data.token)
+      localStorage.setItem('userData',JSON.stringify(data))
       toast({
         title: `User Registered Sucessfully`,
         status: "success",

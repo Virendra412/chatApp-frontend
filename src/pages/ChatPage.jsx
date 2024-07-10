@@ -17,16 +17,19 @@ const ChatPage = () => {
         setNoti(getnoti.notif)
     })();
   }, [token])
+
+console.log(user);
+
   return (
       
 
     <>
    
         <Box className="chatpage" height="100vh" display="flex">
-      {user._id && <Navbar fetchAgain={fetchAgain} setFetchAgain={setFetchAgain} hide={ hide} setHide={setHide}/>}
+      {user?._id && <Navbar fetchAgain={fetchAgain} setFetchAgain={setFetchAgain} hide={ hide} setHide={setHide}/>}
       <Box display="flex" className="Chatbox" flexGrow="1" overflow='hidden' position='relative' pt='30px' bg='#f3f3f3'>
-        {user._id && <AllChats fetchAgain={fetchAgain} setFetchAgain={setFetchAgain} hide={ hide} setHide={setHide} />}
-        {user._id && <SingleChat fetchAgain={fetchAgain} setFetchAgain={setFetchAgain}/>}
+        {user?._id && <AllChats fetchAgain={fetchAgain} setFetchAgain={setFetchAgain} hide={hide} setHide={setHide} />}
+        {user?._id && <SingleChat fetchAgain={fetchAgain} setFetchAgain={setFetchAgain}/>}
       </Box>
       </Box>
     
