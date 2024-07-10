@@ -27,6 +27,7 @@ export const YourProfile = ({ user, isOpen, onOpen, onClose, profileRef }) => {
   const [name, setname] = useState(user.name)
   const [email, setemail] = useState(user.email)
   const [pic, setPic] = useState(user.pic)
+  const [isloading, setIsloading] = useState(false)
 const toast= useToast()
   const { token,setToken,setUser } = ChatState();
 
@@ -41,58 +42,41 @@ const toast= useToast()
     localStorage.setItem('userInfo',result.token)
     window.location.reload()
   }
+  function Logout() {
+    console.log("logout working");
+    localStorage.removeItem("userInfo")
+    setToken("")
+    setUser({})
+    return window.location.assign("/")
+    
+   
+  }
   
   async function postDetails(pics) {
     console.log(pics);
-    // setLoading(true);
-    if (pics === undefined) {
-      toast({
-        title: "please select an Image",
-        status: "warning",
-        duration: 5000,
-        isClosable: true,
-        position: "bottom",
-      });
-      // setLoading(false);
-      return;
-    }
-
-    if (
-      pics.type === "image/jpeg" ||
-      pics.type === "image/png" ||
-      pics.type === "image/jpg"
-    ) {
+    
+    if (pics === undefined) { toast({ title: "please select an Image", status: "warning", duration: 5000, isClosable: true, position: "bottom", }); return; }
+    if ( pics.type === "image/jpeg" || pics.type === "image/png" || pics.type === "image/jpg" ) {
       const data = new FormData();
       data.append("file", pics);
       data.append("upload_preset", "chatApp");
       data.append("cloud_name", "dhoha33eh");
       console.log(data);
-      fetch("  https://api.cloudinary.com/v1_1/dhoha33eh/image/upload", {
-        method: "post",
-        body: data,
-      })
+      setIsloading(true)
+      fetch("  https://api.cloudinary.com/v1_1/dhoha33eh/image/upload", { method: "post", body: data, })
         .then((resp) => resp.json())
         .then((data) => {
           console.log(data);
           setPic(data.url);
-          // setLoading(false);
+          setIsloading(false)
         })
         .catch((err) => {
           console.log(err);
-          // setLoading(false);
+          setIsloading(false)
         });
     }
-    else {
-      toast({
-        title: "Image should have extension .jpg ,jpeg .png",
-        status: "warning",
-        duration: 5000,
-        isClosable: true,
-        position: "top",
-      });
-      // setLoading(false);
-    }
-    // setLoading(false);
+    else { toast({ title: "Image should have extension .jpg ,jpeg .png", status: "warning", duration: 5000, isClosable: true, position: "top", }); }
+   
     return;
   }
 
@@ -100,7 +84,9 @@ const toast= useToast()
     setname(user.name)
     setemail(user.email)
     setPic(user.pic)
-  },[isOpen])
+  }, [isOpen])
+  
+
   return (
     <Drawer
       isOpen={isOpen}
@@ -130,7 +116,7 @@ const toast= useToast()
               width="150px"
               height="150px"
               name={user.name}
-              src={user.pic}
+              src={pic}
             />
           </Box>
 
@@ -165,16 +151,12 @@ const toast= useToast()
             <FormLabel className="fileLabel"><Box display='inline-block' marginInline={3}><i className="fa-solid fa-upload"></i></Box>Choose a pic</FormLabel>
             <Input p={1.5} type="file" className="inputfile" accept="image/*" onChange={(e) => postDetails(e.target.files[0])} />
           </FormControl>
-          <Button alignSelf='start' >Logout</Button>
+          <Button alignSelf='start' onClick={Logout} >Logout</Button>
         </DrawerBody>
 
         <DrawerFooter display='flex' flexDirection='column' alignItems='start' rowGap='10px'>
-          <Button colorScheme="blue" size="sm" width='100%' onClick={userUpdate}>
-            Update
-          </Button>
-          <Button size="sm" colorScheme="red" mr={3} width='100%' onClick={onClose}>
-            Close
-          </Button>
+          <Button isLoading={isloading} loadingText="" colorScheme="blue" size="sm" width='100%' onClick={userUpdate}> Update </Button>
+          <Button isLoading={isloading} loadingText="" size="sm" colorScheme="red" mr={3} width='100%' onClick={onClose}> Close </Button>
         </DrawerFooter>
       </DrawerContent>
     </Drawer>

@@ -43,15 +43,15 @@ const HomePage = () => {
         </Box> :
   <Box className="formSection">
   <Text fontSize='4xl' as='b' color='black'><i className="fa-brands fa-rocketchat  fa-md" ></i> ChatApp</Text>
-  <Box width='100%' maxWidth='500px' padding='20px' bg='white' borderRadius='5px' boxShadow='0px 0px 10px black'>
-    <Tabs isFitted size='md' variant='soft-rounded' >
-      <TabList paddingInline='50px'>
-        <Tab _selected={{ color: 'white', bg: 'black' }} border='1px solid black'>Login</Tab>
-        <Tab _selected={{ color: 'white', bg: 'black' }} border='1px solid black'>SignUp</Tab>
+  <Box width='100%' maxWidth='500px'padding='20px' bg='white' borderRadius='5px' >
+    <Tabs width={'100%'}  >
+      <TabList paddingInline='16px' border='none' >
+        <Tab _selected={{ color: 'black', borderBottom:'2px solid black', background:'rgba(50,50,50,0.1)' }} borderRadius='3px'  width='50%' fontWeight='700'>Login</Tab>
+        <Tab _selected={{ color: 'black',borderBottom:'2px solid black', background:'rgba(50,50,50,0.1)' }}  width='50%' fontWeight='700' borderRadius='3px'>SignUp</Tab>
       </TabList>
 
-      <TabPanels>
-        <TabPanel>
+      <TabPanels >
+        <TabPanel >
           <Login />
         </TabPanel>
         <TabPanel>

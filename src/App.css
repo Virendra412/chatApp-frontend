@@ -11,7 +11,7 @@
 }
 
 body{
-    height: 100vh;
+    height: 100svh;
     /* overflow: hidden; */
    
 }
@@ -34,7 +34,7 @@ body{
   
   /* Handle on hover */
   ::-webkit-scrollbar-thumb:hover {
-    background: #b30000; 
+    background:black; 
   }
 
 
@@ -45,9 +45,10 @@ body{
     align-items: center;
     flex-direction: column;
     row-gap: 10px;
+   
    padding-top: 3%;
     min-width: 300px;
-    background: linear-gradient(#DDA26C,#D09FA4);
+   
 }
 
 nav{

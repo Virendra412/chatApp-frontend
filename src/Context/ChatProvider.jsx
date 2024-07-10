@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { fetchChats, getCurrentUser, getNotification } from "../../utils";
 const ChatContext = createContext();
 
+
 export const ChatProvider = ({ children }) => {
   const [token, setToken] = useState(() => {
     return localStorage.getItem("userInfo");
@@ -25,8 +26,7 @@ export const ChatProvider = ({ children }) => {
         setGettingUserInfo(false)
         return navigate("/");
       } else {
-        // const getnoti = await getNotification(token)
-        // setNoti(getnoti.notif)
+       
         try {
           const result = await getCurrentUser(token)
           setUser(result)

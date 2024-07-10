@@ -33,8 +33,8 @@ export const SignUp = () => {
     }))
   }
   async function postDetails(pics) {
-    console.log(pics);
-    setLoading(true);
+    
+   
     if (pics === undefined) {
       toast({
         title: "please select an Image",
@@ -43,30 +43,23 @@ export const SignUp = () => {
         isClosable: true,
         position: "bottom",
       });
-      setLoading(false);
+      
       return;
     }
 
-    if (
-      pics.type === "image/jpeg" ||
-      pics.type === "image/png" ||
-      pics.type === "image/jpg"
-    ) {
+    if ( pics.type === "image/jpeg" || pics.type === "image/png" || pics.type === "image/jpg" ) {
       const data = new FormData();
       data.append("file", pics);
       data.append("upload_preset", "chatApp");
       data.append("cloud_name", "dhoha33eh");
       console.log(data);
-      fetch("  https://api.cloudinary.com/v1_1/dhoha33eh/image/upload", {
+      setLoading(true)
+      fetch("https://api.cloudinary.com/v1_1/dhoha33eh/image/upload", {
         method: "post",
         body: data,
       })
         .then((resp) => resp.json())
-        .then((data) => {
-          console.log(data);
-          setPic(data.url);
-          setLoading(false);
-        })
+        .then((data) => { console.log(data); setPic(data.url); setLoading(false); })
         .catch((err) => {
           console.log(err);
           setLoading(false);
@@ -80,9 +73,9 @@ export const SignUp = () => {
         isClosable: true,
         position: "top",
       });
-      setLoading(false);
+      
     }
-    setLoading(false);
+    
     return;
   }
 
