@@ -22,7 +22,7 @@ export const Login = () => {
       try {
         setLoading(true);
         const sendData = {email: email, password: password};
-        // console.log(sendData);
+        console.log(sendData);
         const {data} = await axios.post(`${process.env.VITE_API_URL}/user/login`, sendData);
         console.log(data);
         localStorage.setItem('userInfo', data.token)
@@ -50,6 +50,11 @@ export const Login = () => {
       setLoading(false)
     }
 
+  function getTestingCredentials() {
+    
+    setEmail('virendra@gmail.com')
+    setPassword('1234')
+    }
   return (
     <VStack>
      
@@ -57,13 +62,13 @@ export const Login = () => {
       <FormControl id="loginEmail" isRequired>
         <FormLabel>Email</FormLabel>
         <Input size="sm" type="email" placeholder="Enter Your Email"  _placeholder={{ color: 'black' }}
-          variant='filled' onChange={(e)=>setEmail(e.target.value)}/>
+          variant='filled' value={email} onChange={(e)=>setEmail(e.target.value)}/>
         {/* <FormHelperText>We'll never share your email.</FormHelperText> */}
       </FormControl>
       <FormControl id="LoginPassword" isRequired>
         <FormLabel>Password</FormLabel>
         <Input size="sm" type="text" placeholder="Password"  _placeholder={{ color: 'black' }}
-          variant='filled' onChange={(e)=>setPassword(e.target.value)}/>
+          variant='filled' value={password} onChange={(e)=>setPassword(e.target.value)}/>
         {/* <FormHelperText>We'll never share your email.</FormHelperText> */}
       </FormControl>
      
@@ -71,6 +76,9 @@ export const Login = () => {
       <Button isLoading={loading} width="100%" style={{marginTop:15}} bg='black'
         color='white'
         _hover={{ bg:"#1A202C"}} onClick={submitHandler}>Login</Button>
+      <Button isLoading={loading} width="100%" style={{marginTop:15}} bg='red'
+        color='white'
+        _hover={{ bg:"#1A202C"}} onClick={getTestingCredentials} >Get User Credentials for testing</Button>
     </VStack>
   )
 }
